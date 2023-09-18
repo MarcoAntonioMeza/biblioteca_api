@@ -95,7 +95,7 @@ class PrestamoSerializer(serializers.ModelSerializer):
             'fecha_entrega': instance.fecha_entrega,
             'user':{
                 'id':instance.user.id,
-                'user':instance.user.username
+                'user':instance.user.full_name
             },
             'libro':{
                 'id':instance.libro.id,

@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'coreapi',
+
     'biblioteca',
+    'usuario'
 ]
 
 MIDDLEWARE = [
@@ -140,3 +142,5 @@ REST_FRAMEWORK = {
     ),
      
 }
+
+AUTH_USER_MODEL = "usuario.Usuario"

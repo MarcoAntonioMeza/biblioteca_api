@@ -25,7 +25,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # Obtener token de acceso
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # Refrescar token de acceso
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),  # Verificar token de acceso
-    path('api/schema/', include_docs_urls('API documentation')),#Para la documentación
+    path('docs/', include_docs_urls('API documentation')),#Para la documentación
 
-    path('api/',include('biblioteca.urls'))
+    path('api/',include('biblioteca.urls')),
+    path('api/',include('usuario.urls')),
 ]

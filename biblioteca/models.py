@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+from usuario.models import Usuario
 
 # Create your models here.
 
@@ -33,9 +34,9 @@ class Libro(models.Model):
 
 class Prestamo(models.Model):
     fecha_prestamo = models.DateField()
-    fecha_entrega = models.DateField()
+    fecha_entrega = models.DateField(null=False)
 
-    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    user = models.ForeignKey(Usuario,on_delete = models.CASCADE)
     libro = models.ForeignKey(Libro, on_delete=models.CASCADE)
 
     def __str__(self):
