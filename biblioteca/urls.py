@@ -13,6 +13,8 @@ urlpatterns = [
     path('libro/buscar/',LibroViewSet.as_view({'get':'buscar'}), name='buscar-libro'),
     
     path('prestamo/por-usuario/<int:id>/', PrestamoViewSet.as_view({'get':'search_by_user'}), name='prestamos-por-usuario'),
+
+    path('prestamo/mis-prestamos/',PrestamoViewSet.as_view({'get':'mis_prestamos'}))
 ]
 
 urlpatterns += rutas.urls

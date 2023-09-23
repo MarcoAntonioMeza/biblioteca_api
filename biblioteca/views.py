@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from . serializers import *
 from .models import *
@@ -40,9 +41,9 @@ class LibroViewSet(viewsets.ModelViewSet):
 class PrestamoViewSet(viewsets.ModelViewSet):
     queryset = Prestamo.objects.all()
     serializer_class = PrestamoSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [permissions.AllowAny]
-
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    #permission_classes = [permissions.AllowAny]
     def search_by_user(self,request,id):
         try:
             user = Usuario.objects.get(pk=id)
@@ -50,8 +51,20 @@ class PrestamoViewSet(viewsets.ModelViewSet):
             serialize = PrestamoSerializer(prestamos,many=True)
             return Response(serialize.data)
         except Usuario.DoesNotExist:
-            return Response({'message': 'El usuario con el ID especificado no existe.'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {'message': 'El usuario con el ID especificado no existe.'},
+             status=status.HTTP_404_NOT_FOUND)
         
+    def mis_prestamos(self,request):
+        try:
+            user = self.request.user
+            prestamos = Prestamo.objects.filter(user=user)
+            serialize = PrestamoSerializer(prestamos,many=True)
+            return Response(serialize.data)
+        except Exception as e:
+            return Response(
+                {'message': f' {e}'},
+             status=status.HTTP_404_NOT_FOUND)
 
     
 
