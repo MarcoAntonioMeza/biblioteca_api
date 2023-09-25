@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import Group
 
 # Create your models here.
 class UserManager(BaseUserManager):
@@ -62,3 +63,4 @@ class Usuario(AbstractBaseUser,PermissionsMixin):
 
     def __str__(self):
         return f'{self.name} {self.last_name}'
+
